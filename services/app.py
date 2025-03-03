@@ -6,21 +6,20 @@ from pymongo import MongoClient
 from werkzeug.security import generate_password_hash, check_password_hash
 from bson import ObjectId
 
-load_dotenv()  # Load from .env file
+load_dotenv()
 
-mongo_uri = os.getenv("MONGO_URI")
+MONGO_URI = os.getenv("MONGO_URI")
 jwt_secret = os.getenv("JWT_SECRET_KEY")
 
 
 app = Flask(__name__)
 
-MONGO_URI = "mongodb+srv://AnilMarripudi:Anil30071998@personal-project.548hd.mongodb.net/?retryWrites=true&w=majority&appName=Personal-project"
 client = MongoClient(MONGO_URI)
 db = client['user_templates']
 users_collection = db['users']
 templates_collection = db['templates']
 
-app.config['JWT_SECRET_KEY'] = 'supersecretkey'
+app.config['JWT_SECRET_KEY'] = jwt_secret
 jwt = JWTManager(app)
 
 
